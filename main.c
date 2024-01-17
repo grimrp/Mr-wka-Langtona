@@ -1,11 +1,20 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <wchar.h>
+#include <locale.h>
+#include<string.h>
 #include "simulation.h"
 
 /*
 interpretacja tablicy:
 0 - białe pole
 1 - czarne pole
+2-┌
+3- ┐
+4-└
+5- ┘
+6- -
+8-sciana+\n
 9 - sciana
 10 - mrowka skierowana w góre na blialym polu
 20 - mrowka skierowana w prawo na blialym polu
@@ -23,7 +32,7 @@ interpretacja rotacji:
 4 - lewo
 */
 
-
+//wiersze/kolumny
 int main(){
 	//zmienne wejsciowe:
 	int width=50;
@@ -35,21 +44,42 @@ int main(){
 	int map[width+2][height+2];
 	for(int i=0;i<width+2;i++){
 		for(int j=0;j<height+2;j++){
-			if(i==0){
-				map[i][j]=9;
+			//┌
+			if(i==0 && j==0){
+				map[i][j]=2;
 			}
-			else if(j==0){
-				map[i][j]=9;
+			//┐
+			else if(i==0 && j==height+1){
+                                map[i][j]=3;
+                        }
+			//└
+			else if(i==width+1 && j==0){
+                                map[i][j]=4;
 			}
-			else if(i==width+1){
-				map[i][j]=9;
+			//┘
+			else if(i==width+1 && j==height+1){
+                                map[i][j]=5;
+                        }
+			// ─
+			else if(i>0 && i<width+1 && j==0){
+                                map[i][j]=6;
+                        }
+			// ─
+                        else if(i>0 && i<width+1 && j==height+1){
+                                map[i][j]=6;
+                        }
+			// |
+			else if(i==0 && j>0 && j<height+1){
+                                map[i][j]=9;
 			}
-			else if(j==height+1){
-				map[i][j]=9;
-			}
-			else{
-				map[i][j]=0;
-			}
+			// |
+			else if(i==width+1 && j>0 && j<height+1){
+                                map[i][j]=8;
+                        }
+			// białe pole
+			else if(i>0 && i<width+1 && j>0 && j<height+1){
+                                map[i][j]=0;
+                        }
 		}
 	}
 	
