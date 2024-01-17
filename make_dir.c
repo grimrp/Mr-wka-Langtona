@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include<stdlib.h>
-int main() {
-
+#include<make_dir.h>
+void makedir(){
 int status = system("mkdir mapy");
 
 // Sprawdzanie, czy utworzenie folderu było udane
@@ -12,5 +12,4 @@ else {
 	printf("Nie udało się utworzyć folderu 'mapy'.\n");
 }
 
-return 0;
 }
