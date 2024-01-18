@@ -56,10 +56,11 @@ void generate_empty_map(int width, int height, int (*map)[width+2]){
 }
 
 
-void read_map(int width, int height, int (*map)[width+2]){
+int read_map(int width, int height, int (*map)[width+2]){
 int i=0;
 int j=0;
 char filename[100];
+char znak[3];
 printf("Podaj nazwę pliku: ");
 scanf("%s", filename);
 FILE *file = fopen(filename, "r");
@@ -68,7 +69,7 @@ FILE *file = fopen(filename, "r");
         return 1;
     }
 
-while ((znak = fgetc(plik)) != EOF) {
+while ((znak = fgetc(file)) != EOF) {
    if(i>=0 && i<=width+1){
 	if(j>=0 && j<=height+1){
  				//┌
@@ -222,7 +223,8 @@ while ((znak = fgetc(plik)) != EOF) {
 
 
 
-}}}}
+}}}
+return 0;}
 
 
 
@@ -277,5 +279,6 @@ void generate_random_map(int width, int height, int (*map)[width+2]){
                                 }
                 }
         }
+
 }
 
