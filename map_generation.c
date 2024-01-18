@@ -55,12 +55,12 @@ void generate_empty_map(int width, int height, int (*map)[width+2]){
 	}
 }
 
-
-/*int read_map(int width, int height, int (*map)[width+2]){
+/*
+int read_map(int width, int height, int (*map)[width+2]){
 int i=0;
 int j=0;
 char filename[100];
-char znak[3];
+char znak;
 printf("Podaj nazwę pliku: ");
 scanf("%s", filename);
 FILE *file = fopen(filename, "r");
@@ -69,107 +69,108 @@ FILE *file = fopen(filename, "r");
         return 1;
     }
 
-while ((znak = fgetc(file)) != EOF) {
-   if(i>=0 && i<=width+1){
-	if(j>=0 && j<=height+1){
+while ((fgetc(file)) != EOF) {
+   znak=fgetc(file);
+   if(j>=0 && j<=width+1){
+	if(i>=0 && i<=height+1){
  				//┌
                                 if(znak=="┌"){
-                                        map[i][j]=2;
-					if(j+1>height+1){
-					j=0;
-					i++;}
+                                        map[j][i]=2;
+					if(i+1>width+1){
+					i=0;
+					j++;}
 					else
-					j++;
+					i++;
 				 }
                                 //└
                                 else if(znak=="└"){
-                                        map[i][j]=3;
-					if(j+1>height+1){
-                                        j=0;
-                                        i++;}
+                                        map[j][i]=3;
+					if(i+1>width+1){
+                                        i=0;
+                                        j++;}
                                         else
-                                        j++;
+                                        i++;
 
                                  }
                                 //┐
                                 else if(znak=="┐"){
-                                        map[i][j]=4;
-                               		if(j+1>height+1){
-                                        j=0;
-                                        i++;}
+                                        map[j[i]=4;
+                               		if(i+1>width+1){
+                                        i=0;
+                                        j++;}
                                         else
-                                        j++;
+                                        i++;
 
 				 }
                                 //┘
                                 else if(znak=="┘"){
-                                        map[i][j]=5;
-					if(j+1>height+1){
-                                        j=0;
-                                        i++;}
+                                        map[j][i]=5;
+					if(i+1>width+1){
+                                        i=0;
+                                        j++;}
                                         else
-                                        j++;
+                                        i++;
 
                                 }
                                 // ─
                                 else if(znak=="─"){
-                                        map[i][j]=6;
-					if(j+1>height+1){
-                                        j=0;
-                                        i++;}
+                                        map[j][i]=6;
+					if(i+1>width+1){
+                                        i=0;
+                                        j++;}
                                         else
-                                        j++;
+                                        i++;
                                	 }
                                 // |
                                 else if(znak=="|"){
-                                        map[i][j]=9;
-					if(j+1>height+1){
-                                        j=0;
-                                        i++;}
+                                        map[j][i]=9;
+					if(i+1>width+1){
+                                        i=0;
+                                        j++;}
                                         else
-                                        j++;
+                                        i++;
 
                                 }
                                 // białe pole
                                 else if(znak=="█"){
-                                        map[i][j]=0;
-					if(j+1>height+1){
-                                        j=0;
-                                        i++;}
+                                        map[j][i]=0;
+					if(i+1>width+1){
+                                        i=0;
+                                        j++;}
                                         else
-                                        j++;
+                                        i++;
 
                                 }
                                 else if(znak==" "){
-                                        map[i][j]=1;
-					if(j+1>height+1){
-                                        j=0;
-                                        i++;}
+                                        map[j][i]=1;
+					if(i+1>width+1){
+                                        i=0;
+                                        j++;}
                                         else
-                                        j++;
+                                        i++;
 
                                 }
                                 else if(znak=="▲"){
-                                        map[i][j]=10;
-					   if(j+1>height+1){
-                                        j=0;
-                                        i++;}
+                                        map[j][i]=10;
+					   if(i+1>width+1){
+                                        i=0;
+                                        j++;}
                                         else
-                                        j++;
+                                        i++;
 
                                 }
                                 else if(znak=="△"){
-                                        map[i][j]=11;
-					if(j+1>height+1){
-                                        j=0;
-                                        i++;}
+                                        map[j][i]=11;
+					if(i+1>width+1){
+                                        i=0;
+                                        j++;}
                                         else
-                                        j++;
+                                        i++;
 
                                 }
                                 else if(znak=="▶"){
-                                        map[i][j]=20;
-					if(j+1>height+1){
+                                        map[j][i]=20;
+					if(i+1>width+1){
                                         j=0;
                                         i++;}
                                         else
@@ -228,13 +229,9 @@ return 0;}
 */
 
 
-void generate_random_map(int width, int height, int (*map)[width+2]){
-        printf("Podaj procent czarnych pól na mapie: ");
-	int r=0;
-	scanf("%d",&r);
-	srand(time(NULL));
 
-		
+void generate_random_map(int width, int height, int (*map)[width+2], int r){
+	srand(time(0));
 	 for(int i=0;i<width+2;i++){
                 for(int j=0;j<height+2;j++){
                                 //┌
@@ -271,12 +268,13 @@ void generate_random_map(int width, int height, int (*map)[width+2]){
                                 }
                                 // białe pole
                                 else if(i>0 && i<width+1 && j>0 && j<height+1){
-					int random_number=rand()%101;
-					printf("%d",random_number);
-					if(r>=random_number)
-					map[i][j]=0;
-					else
-					map[i][j]=1;
+					int random_number = rand() % 101;
+					if(r>=random_number){
+						map[i][j]=1;
+					}
+					else{
+						map[i][j]=0;
+					}
                                 }
                 }
         }

@@ -17,11 +17,11 @@ for(int i=0;i<width+2;i++) {
 		switch(map[i][j]){
 			
 			case 0:
-			fprintf(file,"█");
+			fprintf(file," ");
 			break;
 
 			case 1:
-			fprintf(file," ");
+			fprintf(file,"█");
 			break;
 
 			case 2:
@@ -49,35 +49,35 @@ for(int i=0;i<width+2;i++) {
 			break;
 
 			case 10:
-			fprintf(file,"▲");
-			break;
-
-			case 11:
 			fprintf(file,"△");
 			break;
 
-			case 20:
-			fprintf(file,"▶");
+			case 11:
+			fprintf(file,"▲");
 			break;
 
-			case 21:
+			case 20:
 			fprintf(file,"▷");
 			break;
 
-			case 30:
-			fprintf(file,"▼");
+			case 21:
+			fprintf(file,"▶");
 			break;
 
-			case 31:
+			case 30:
 			fprintf(file,"▽");
 			break;
 
+			case 31:
+			fprintf(file,"▼");
+			break;
+
 			case 40:
-			fprintf(file,"◀");
+			fprintf(file,"◁");
 			break;
 
 			case 41:
-			fprintf(file,"◁");
+			fprintf(file,"◀");
 			break;
 		}
 	}

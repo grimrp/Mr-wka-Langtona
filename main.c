@@ -6,6 +6,7 @@
 #include "simulation.h"
 #include "map_generation.h"
 #include "map_saving.h"
+#include <getopt.h>
 
 /*
 interpretacja tablicy:
@@ -34,16 +35,104 @@ interpretacja rotacji:
 */
 
 //wiersze/kolumny
-int main(){
-	//zmienne wejsciowe:
-	int width=100;
-	int height=100;
-	int iterations=11500;
-	char rotation=1;
+
+
+/*
+getopt:
+h - help
+m - długość tablicy
+n - szerokość tablicy
+i - liczba iteracji
+f - nazwa pliku wynikowego
+r - początkowa rotacja
+l - opcja generowania losowej mapy
+u - opcja wczytania mapy z pliku
+*/
+int main(int argc, char **argv){  
 	
-	//generowanie pustej mapy(trzeba przeniesc do funkcji):
+	//zmienne wejsciowe:
+	int width=0;
+	int height=0;
+	int iterations=0;
+	char rotation=1;
+	char *end_file_name = "default";
+	int random=0;
+	char *upload_file_name ="";
+	
+	int option_value=0, loop=1;
+	
+	while((option_value=getopt(argc, argv, "h:m:n:i:f:r:l:u"))){
+		switch(option_value){
+			case 'h':
+				printf("mam h");
+				break;
+			case 'm':
+				width=atoi(optarg);
+				break;
+			case 'n':
+				height=atoi(optarg);
+				break;
+			case 'i':
+				iterations=atoi(optarg);
+				break;
+			case 'f':
+				end_file_name=optarg;
+				break;
+			case 'r':
+				rotation=atoi(optarg);
+				if(rotation==1 || rotation==2 || rotation==3 || rotation==4){
+				}
+				else{
+					rotation=1;
+				}
+				break;
+			case 'l':
+				random=atoi(optarg);
+				break;
+			case 'u':
+				upload_file_name=optarg;
+				break;
+			default:
+				loop=0;
+				break;
+		}
+		if(loop==0){
+			break;
+		}
+	}
+	
+	if(width==0){
+		printf("Źle podany lub brak argumentu -m\n");
+		return 0;
+	}
+	if(height==0){
+		printf("Źle podany lub brak argumentu -n\n");
+		return 0;
+	}
+	if(iterations==0){
+		printf("Źle podany lub brak argumentu -i\n");
+		return 0;
+	}
+	if(random<0 || random>100){
+		printf("Źle podany lub brak argumentu -l\n");
+		return 0;		
+	}
+	if(upload_file_name!="" && random!=0){
+		printf("Nie można wczytać mapy z pliku i jednocześnie wygenerować losowej mapy!\n");
+		return 0;
+	}
+	
+	//generowanie mapy:
 	int map[width+2][height+2];
-	generate_empty_map(width, height, map);
+	if(random != 0){
+		generate_random_map(width, height, map, random);
+	}
+	else if(upload_file_name!=""){
+		printf("lol");
+	}
+	else{
+		generate_empty_map(width, height, map);
+	}
 	
 	//pozycja poczatkowa mrowki:
 	int pos_x=width/2;
