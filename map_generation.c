@@ -55,12 +55,10 @@ void generate_empty_map(int width, int height, int (*map)[width+2]){
 	}
 }
 
-int read_map(int width, int height, int (*map)[width+2]){
+int read_map(char *filename,int width, int height, int (*map)[width+2]){
 int i=0;
 int j=0;
-char filename[100];
 int znak;
-printf("Podaj nazwę pliku: ");
 scanf("%s", filename);
 FILE *file = fopen(filename, "r");
     if (file == NULL) {
