@@ -4,7 +4,7 @@
 #include <wchar.h>
 #include <locale.h>
 #include <string.h>
-
+#include<time.h>
 /*
 tu maja byc funckje:
 - generowanie pustej mapy
@@ -56,7 +56,7 @@ void generate_empty_map(int width, int height, int (*map)[width+2]){
 }
 
 
-int read_map(int width, int height, int (*map)[width+2]){
+/*int read_map(int width, int height, int (*map)[width+2]){
 int i=0;
 int j=0;
 char filename[100];
@@ -225,13 +225,13 @@ while ((znak = fgetc(file)) != EOF) {
 
 }}}
 return 0;}
-
+*/
 
 
 void generate_random_map(int width, int height, int (*map)[width+2]){
         printf("Podaj procent czarnych pól na mapie: ");
 	int r=0;
-	scanf("%d",r);
+	scanf("%d",&r);
 	
 		
 	 for(int i=0;i<width+2;i++){
