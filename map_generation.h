@@ -1,6 +1,6 @@
 #ifndef _MAP_GENERATION_H
 #define _MAP_GENERATION_H
 
-//funckje
+void generate_empty_map(int width, int height, int (*map)[width+2]);
 
 #endif

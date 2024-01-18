@@ -1,14 +1,15 @@
 #include "map_saving.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <wchar.h>
 #include <locale.h>
-#include<string.h>
+#include <string.h>
 //funkcja zapisujaca tablice do pliku
 
-int map_saving(int width, int height, int map[][]) {
+int map_saving(int width, int height, int (*map)[width+2]){
 
 FILE *file;
-char *filename = "mapa/pusta_mapa.txt";
+char *filename = "mapa";
 file = fopen(filename, "w");
 
 for(int i=0;i<width+2;i++) {
@@ -28,7 +29,7 @@ for(int i=0;i<width+2;i++) {
 			break;
 
 			case 3:
-			fprintf(file,"┐\n");
+			fprintf(file,"┐");
 			break;
 
 			case 4:
@@ -40,15 +41,11 @@ for(int i=0;i<width+2;i++) {
 			break;
 
 			case 6:
-			fprintf(file,"─");
-			break;
-
-			case 8:
-			fprintf(file,"│\n");
+			fprintf(file,"│");
 			break;
 
 			case 9:
-			fprintf(file,"│");
+			fprintf(file,"─");
 			break;
 
 			case 10:
@@ -84,6 +81,7 @@ for(int i=0;i<width+2;i++) {
 			break;
 		}
 	}
+	fprintf(file,"\n");
 }
 fclose(file);
 return 0;

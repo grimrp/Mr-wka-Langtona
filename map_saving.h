@@ -1,6 +1,6 @@
 #ifndef _MAP_SAVING_H
 #define _MAP_SAVING_H
 
-//funckje
+int map_saving(int width, int height, int (*map)[width+2]);
 
 #endif

@@ -2,20 +2,21 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <locale.h>
-#include<string.h>
+#include <string.h>
 #include "simulation.h"
+#include "map_generation.h"
+#include "map_saving.h"
 
 /*
 interpretacja tablicy:
 0 - białe pole
 1 - czarne pole
-2-┌
+2- ┌ 
 3- ┐
-4-└
+4- └
 5- ┘
-6- -
-8-sciana+\n
-9 - sciana
+6- |
+9 - ─
 10 - mrowka skierowana w góre na blialym polu
 20 - mrowka skierowana w prawo na blialym polu
 30 - mrowka skierowana w dol na blialym polu
@@ -35,53 +36,14 @@ interpretacja rotacji:
 //wiersze/kolumny
 int main(){
 	//zmienne wejsciowe:
-	int width=50;
-	int height=50;
-	int iterations=800;
+	int width=100;
+	int height=100;
+	int iterations=11500;
 	char rotation=1;
 	
 	//generowanie pustej mapy(trzeba przeniesc do funkcji):
 	int map[width+2][height+2];
-	for(int i=0;i<width+2;i++){
-		for(int j=0;j<height+2;j++){
-			//┌
-			if(i==0 && j==0){
-				map[i][j]=2;
-			}
-			//┐
-			else if(i==0 && j==height+1){
-                                map[i][j]=3;
-                        }
-			//└
-			else if(i==width+1 && j==0){
-                                map[i][j]=4;
-			}
-			//┘
-			else if(i==width+1 && j==height+1){
-                                map[i][j]=5;
-                        }
-			// ─
-			else if(i>0 && i<width+1 && j==0){
-                                map[i][j]=6;
-                        }
-			// ─
-                        else if(i>0 && i<width+1 && j==height+1){
-                                map[i][j]=6;
-                        }
-			// |
-			else if(i==0 && j>0 && j<height+1){
-                                map[i][j]=9;
-			}
-			// |
-			else if(i==width+1 && j>0 && j<height+1){
-                                map[i][j]=8;
-                        }
-			// białe pole
-			else if(i>0 && i<width+1 && j>0 && j<height+1){
-                                map[i][j]=0;
-                        }
-		}
-	}
+	generate_empty_map(width, height, map);
 	
 	//pozycja poczatkowa mrowki:
 	int pos_x=width/2;
@@ -114,12 +76,17 @@ int main(){
 		else{
 			map[pos_x][pos_y]=new_state;
 		}
+		//interpretacja tablicy na plik
+		map_saving(width, height, map);
 	}
 	
 	//test dzialania w terminalu:
+	printf("\n\n");
 	for(int i=0;i<width+2;i++){
 		for(int j=0;j<height+2;j++){
-			printf("%d", map[i][j]);
+			printf("%d ",map[i][j]);
 		}
+		printf("\n");
 	}
 }
+
