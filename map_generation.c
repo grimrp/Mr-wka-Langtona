@@ -232,7 +232,8 @@ void generate_random_map(int width, int height, int (*map)[width+2]){
         printf("Podaj procent czarnych pól na mapie: ");
 	int r=0;
 	scanf("%d",&r);
-	
+	srand(time(NULL));
+
 		
 	 for(int i=0;i<width+2;i++){
                 for(int j=0;j<height+2;j++){
@@ -270,8 +271,8 @@ void generate_random_map(int width, int height, int (*map)[width+2]){
                                 }
                                 // białe pole
                                 else if(i>0 && i<width+1 && j>0 && j<height+1){
-                                        srand(time(0));
-					int random_number = rand() % 101;
+					int random_number=rand()%101;
+					printf("%d",random_number);
 					if(r>=random_number)
 					map[i][j]=0;
 					else
