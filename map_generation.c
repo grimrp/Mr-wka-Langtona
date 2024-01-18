@@ -59,7 +59,6 @@ int read_map(char *filename,int width, int height, int (*map)[width+2]){
 int i=0;
 int j=0;
 int znak;
-scanf("%s", filename);
 FILE *file = fopen(filename, "r");
     if (file == NULL) {
         printf("Nie można otworzyć pliku.\n");

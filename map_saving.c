@@ -6,9 +6,10 @@
 #include <string.h>
 //funkcja zapisujaca tablice do pliku
 
-int map_saving(char *filename,int width, int height, int (*map)[width+2]){
+int map_saving(int width, int height, int (*map)[width+2]){
 
 FILE *file;
+char *filename = "mapa";
 file = fopen(filename, "w");
 
 for(int i=0;i<width+2;i++) {

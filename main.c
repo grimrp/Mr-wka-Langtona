@@ -64,7 +64,7 @@ int main(int argc, char **argv){
 	while((option_value=getopt(argc, argv, "h:m:n:i:f:r:l:u"))){
 		switch(option_value){
 			case 'h':
-				printf("mam h");
+				printf();
 				break;
 			case 'm':
 				width=atoi(optarg);
@@ -121,14 +121,14 @@ int main(int argc, char **argv){
 		printf("Nie można wczytać mapy z pliku i jednocześnie wygenerować losowej mapy!\n");
 		return 0;
 	}
-	
 	//generowanie mapy:
 	int map[width+2][height+2];
 	if(random != 0){
 		generate_random_map(width, height, map, random);
 	}
 	else if(upload_file_name!=""){
-		printf("lol");
+		printf("lolololololo");
+		read_map("tes", width, height, map);
 	}
 	else{
 		generate_empty_map(width, height, map);
