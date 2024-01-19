@@ -6,11 +6,13 @@
 #include <string.h>
 //funkcja zapisujaca tablice do pliku
 
-int map_saving(int width, int height, int (*map)[width+2]){
+int map_saving(char *filename, int iterations, int width, int height, int (*map)[width+2]){
+char fileName[50];
+snprintf(fileName, sizeof(fileName), "mapy/%s_%d", filename,iterations );
 
 FILE *file;
-char *filename = "mapa";
-file = fopen(filename, "w");
+char *name=(filename);
+file = fopen(fileName, "w");
 
 for(int i=0;i<width+2;i++) {
 	for(int j=0;j<height+2;j++) {

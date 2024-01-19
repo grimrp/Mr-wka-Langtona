@@ -64,7 +64,20 @@ int main(int argc, char **argv){
 	while((option_value=getopt(argc, argv, "h:m:n:i:f:r:l:u"))){
 		switch(option_value){
 			case 'h':
-				printf();
+			printf("Symulator mrówki Langtona\n\n");
+               	 	printf("Flagi: \n");
+                	printf("m - długość tablicy(wymagane)\n");
+                	printf("n - szerokość tablicy(wymagane)\n");
+                	printf("i - liczba iteracji(wymagane)\n");
+                	printf("f - nazwa pliku wynikowego(wymagane)\n");
+                	printf("r - początkowa rotacja(podstawowa wartość = 1)\n");
+                	printf("    1 - góra\n");
+                	printf("    2 - prawo\n");
+                	printf("    3 - dół\n");
+                	printf("    4 - lewo\n");
+                	printf("l - generowania losowej mapy według podanego procentu wypełnienia czarnymi polami(opcjonalne)\n");
+                	printf("u - wczytania mapy z podanego pliku(opcjonalne)\n");
+                	return 0;
 				break;
 			case 'm':
 				width=atoi(optarg);
@@ -121,6 +134,7 @@ int main(int argc, char **argv){
 		printf("Nie można wczytać mapy z pliku i jednocześnie wygenerować losowej mapy!\n");
 		return 0;
 	}
+
 	//generowanie mapy:
 	int map[width+2][height+2];
 	if(random != 0){
@@ -142,7 +156,9 @@ int main(int argc, char **argv){
 	//zmienne pomocnicze:
 	int state;
 	int new_state;
-	
+
+int command = system("rm -r mapy");
+int status = system("mkdir mapy");	
 	//symulacja:
 	for(int i=0;i<iterations;i++){
 		//zmiana rotacji:
@@ -166,7 +182,7 @@ int main(int argc, char **argv){
 			map[pos_x][pos_y]=new_state;
 		}
 		//interpretacja tablicy na plik
-		map_saving(width, height, map);
+		map_saving(end_file_name, i, width, height, map);
 	}
 	
 	//test dzialania w terminalu:
