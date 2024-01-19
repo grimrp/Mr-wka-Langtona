@@ -57,11 +57,14 @@ int main(int argc, char **argv){
 	char rotation=1;
 	char *end_file_name = "default";
 	int random=0;
-	char *upload_file_name ="";
+	char *upload_file_name = "";
 	
 	int option_value=0, loop=1;
 	
-	while((option_value=getopt(argc, argv, "h:m:n:i:f:r:l:u"))){
+	int command = system("rm -r mapy");
+	int status = system("mkdir mapy");
+		
+	while((option_value=getopt(argc, argv, "h:m:n:i:f:r:u:l:"))){
 		switch(option_value){
 			case 'h':
 			printf("Symulator mrówki Langtona\n\n");
@@ -141,8 +144,7 @@ int main(int argc, char **argv){
 		generate_random_map(width, height, map, random);
 	}
 	else if(upload_file_name!=""){
-		printf("lolololololo");
-		read_map("tes", width, height, map);
+		read_map(upload_file_name, width, height, map);
 	}
 	else{
 		generate_empty_map(width, height, map);
@@ -156,9 +158,7 @@ int main(int argc, char **argv){
 	//zmienne pomocnicze:
 	int state;
 	int new_state;
-
-int command = system("rm -r mapy");
-int status = system("mkdir mapy");	
+	
 	//symulacja:
 	for(int i=0;i<iterations;i++){
 		//zmiana rotacji:
@@ -174,7 +174,6 @@ int status = system("mkdir mapy");
 		new_state=change_ant_placing(state, rotation);
 		//sprawdzenie czy walnela w sciane:
 		if(new_state==0){
-			printf("mrówka walnela w sciane");
 			return 0;
 		}
 		//postawienie mrowki na mapie:
@@ -182,16 +181,7 @@ int status = system("mkdir mapy");
 			map[pos_x][pos_y]=new_state;
 		}
 		//interpretacja tablicy na plik
-		map_saving(end_file_name, i, width, height, map);
-	}
-	
-	//test dzialania w terminalu:
-	printf("\n\n");
-	for(int i=0;i<width+2;i++){
-		for(int j=0;j<height+2;j++){
-			printf("%d ",map[i][j]);
-		}
-		printf("\n");
+		map_saving(end_file_name, i+1, width, height, map);
 	}
 }
 
