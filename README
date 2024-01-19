@@ -1,0 +1,13 @@
+Program jest symulatorem automatu komórkowego mrówki Langtona.
+Program tworzy mapę o wymiarach m na n i w zależności od argumentów wywołania tworzy pustą mapę,
+czyta mapę z pliku lub tworzy mapę z odpowiednim procentem (podanym przy wywołaniu) czarnych pól.
+Flagi:
+m - długość tablicy(wymagane)
+n - szerokość tablicy(wymagane)
+i - liczba iteracji(wymagane)
+f - nazwa pliku wynikowego(wymagane)
+r - początkowa rotacja(podstawowa wartość = 1)
+l - generowania losowej mapy według podanego procentu wypełnienia czarnymi polami(opcjonalne)
+u - wczytania mapy z podanego pliku(opcjonalne)
+
+
